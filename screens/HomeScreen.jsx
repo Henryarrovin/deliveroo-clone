@@ -1,5 +1,5 @@
-import { Image, Text, TextInput } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import { Image, ScrollView, Text, TextInput } from 'react-native'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
@@ -10,15 +10,37 @@ import {
     MagnifyingGlassIcon,
     AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
+import Categories from '../components/categories';
+import FeaturedRow from '../components/FeaturedRow';
+import { sanityClient } from '../sanity';
 
  const HomeScreen = () => {
     const navigation = useNavigation();
+    const [featuredCategories, setFeaturedCategories] = useState([]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
         });
     }, []);
+
+    useEffect(() => {
+        sanityClient.fetch(`
+        *[_type == "restaurant"] {
+            ...,
+            restaurants[]->{
+              ...,
+              dishes[]->
+            }
+          }
+        `).then((data) => {
+            setFeaturedCategories(data);
+        }).catch((error) => {
+            console.log('Error: ', error);
+        });
+    }, []);
+
+    console.log(featuredCategories);
 
   return (
     <SafeAreaView style={tw`bg-white pt-5`}>
@@ -52,6 +74,30 @@ import {
             
             <AdjustmentsVerticalIcon size={35} color={"#00CCBB"}/>
         </View>
+
+        <ScrollView style={tw`bg-gray-100 `}
+            contentContainerStyle={{
+                paddingBottom: 100,
+            }}
+        >
+            <Categories />
+
+            <FeaturedRow
+                id={"1"} 
+                title={"Featured"}
+                description={"Paid and placements from our partners"}
+            />
+            <FeaturedRow
+                id={"12"} 
+                title={"Tasty Discounts"}
+                description={"Paid and placements from our partners"}
+            />
+            <FeaturedRow
+                id={"123"} 
+                title={"Offers near you"}
+                description={"Paid and placements from our partners"}
+            />
+        </ScrollView>
     </SafeAreaView>
   )
 }
