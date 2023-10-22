@@ -26,7 +26,7 @@ import { sanityClient } from '../sanity';
 
     useEffect(() => {
         sanityClient.fetch(`
-        *[_type == "restaurant"] {
+        *[_type == "featured"] {
             ...,
             restaurants[]->{
               ...,
@@ -82,21 +82,17 @@ import { sanityClient } from '../sanity';
         >
             <Categories />
 
-            <FeaturedRow
-                id={"1"} 
-                title={"Featured"}
-                description={"Paid and placements from our partners"}
-            />
-            <FeaturedRow
-                id={"12"} 
-                title={"Tasty Discounts"}
-                description={"Paid and placements from our partners"}
-            />
-            <FeaturedRow
-                id={"123"} 
-                title={"Offers near you"}
-                description={"Paid and placements from our partners"}
-            />
+            {featuredCategories?.map(category => {
+                return (
+                    <FeaturedRow
+                        key={category._id}
+                        id={category._id} 
+                        title={category.name}
+                        description={category.short_description}
+                    />
+                );
+            })}
+
         </ScrollView>
     </SafeAreaView>
   )
