@@ -39,7 +39,7 @@ const DishRow = ({ id, name, description, price, image}) => {
         <View>
             <Image 
                 source={{
-                    url: urlFor(image).url()
+                    uri: urlFor(image).url()
                 }}
                 style={tw`h-20 w-20 bg-gray-300 p-4` }
             />

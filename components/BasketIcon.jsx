@@ -10,7 +10,7 @@ const BasketIcon = () => {
     const navigation = useNavigation();
     const basketTotal = useSelector(selectBasketTotal);
 
-    // if (items.length === 0) return null; 
+    if (items.length === 0) return null; 
 
   return (
     <View style={tw`absolute bottom-10 w-full z-50`}>

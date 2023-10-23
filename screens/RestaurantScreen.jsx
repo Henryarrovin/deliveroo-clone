@@ -41,7 +41,8 @@ const RestaurantScreen = () => {
             dishes,
             long,
             lat
-        }))
+        }));
+        console.log(short_description);
     }, [dispatch]);
 
     useLayoutEffect(() => {
@@ -104,10 +105,6 @@ const RestaurantScreen = () => {
                 </Text>
 
                 {dishes.map((dish) => {
-                    // const imageUrl = urlFor(dish.image.asset._ref).url();
-                    {console.log("This is the image:", dish.image);}
-                    {console.log("This is the imageUrl:", imageUrl);}
-                    {console.log("This is the description:", dish.short_description);}
                     return(
                         <DishRow 
                             key={dish._id}
