@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { XMarkIcon } from 'react-native-heroicons/solid';
 import * as Progress from 'react-native-progress';
-// import MapView, {Marker} from 'react-native-maps';
 
 const DeliveryScreen = () => {
     const navigation = useNavigation();
@@ -41,27 +40,6 @@ const DeliveryScreen = () => {
             </View>
         </SafeAreaView>
 
-        {/* <MapView
-            initialRegion={{
-                latitude: restaurant.lat,
-                longitude: restaurant.long,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
-            }}
-            style={tw`flex-1 mt-10 z-0`}
-            mapType='mutedStandard'
-        >
-            <Marker 
-                coordinate={{
-                    latitude: restaurant.lat,
-                    longitude: restaurant.long
-                }}
-                title='title'
-                description={restaurant.short_description}
-                identifier='origin'
-                pinColor='#00CCBB'
-            />
-        </MapView> */}
         <View style={tw`flex-1 justify-end`}>
             <SafeAreaView style={tw`bg-white flex-row items-center gap-x-5 h-28`}>
                 <Image 
